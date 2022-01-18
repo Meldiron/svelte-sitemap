@@ -20,7 +20,30 @@ npm install svelte-sitemap --save-dev
 
 ## Usage
 
-### CLI method (recommended)
+### Config file method (recommended)
+
+Create config file `svelte-sitemap.cjs` in the root of your project:
+
+`svelte-sitemap.cjs`
+
+```js
+module.exports = {
+  domain: 'https://www.example.com'
+  // ...more options
+};
+```
+
+Add `svelte-sitemap` as your postbuild script in `package.json` file:
+
+`package.json`
+
+```json
+{
+  "postbuild": "npx svelte-sitemap"
+}
+```
+
+### Alternative 1: CLI method
 
 Use this script as a **postbuild hook**. See this [example](#example).
 
@@ -30,7 +53,7 @@ npx svelte-sitemap --domain https://example.com
 
 It scans your routes in `build/` folder and generates `build/sitemap.xml` file
 
-### Alternative: TypeScript or JavaScript method
+### Alternative 2: TypeScript or JavaScript method
 
 Sometimes it can be useful to call the script directly from JavaScript or TypeScript. Of course there is also this option, but in most cases you will need the [CLI method](#cli-method-recommended) as a postbuild hook.
 
@@ -46,15 +69,26 @@ And now you can run your script like this: `node my-script.js`
 
 ## Example
 
-Use this library as a `postbuild` hook in your `package.json`
+Use this library as a `postbuild` hook in your `package.json` with config file `svelte-sitemap.cjs` in your project root.
+
+File: `package.json`
 
 ```json
 {
   "name": "my-project",
   "scripts": {
-    "postbuild": "npx svelte-sitemap --domain https://mydomain.com"
+    "postbuild": "npx svelte-sitemap"
   }
 }
+```
+
+File: `svelte-sitemap.cjs`
+
+```typescript
+module.exports = {
+  domain: 'https://www.example.com',
+  trailingSlashes: true
+};
 ```
 
 ## ⚙️ Options
@@ -138,6 +172,7 @@ yarn demo
 - svelte-sitemap is workaround for [this official SvelteKit issue](https://github.com/sveltejs/kit/issues/1142)
 - Brand new version is inspired by [Richard's article](https://r-bt.com/learning/sveltekit-sitemap/)
 - Thanks to [@auderer](https://github.com/auderer) because [his issue](https://github.com/bartholomej/svelte-sitemap/issues/1) changed the direction of this library
+- Config files inspired by [next-sitemap](https://github.com/iamvishnusankar/next-sitemap)
 
 ## 📝 License
 
